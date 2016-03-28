@@ -2,7 +2,7 @@ CNAME := conda
 IMAGE_NAME = youske/alpine-${CNAME}
 INSTANT_CONTAINER_NAME = instant_cont_${CNAME}
 
-build: Dockerfile 
+build: Dockerfile
 	docker build --file Dockerfile --tag $(IMAGE_NAME) .
 
 build_nocache: Dockerfile
@@ -20,5 +20,5 @@ daemon:
 push: build
 	docker push ${IMAGE_NAME}:latest
 
-notag: 
+notag:
 	docker rmi $(docker images | awk '/^<none>/{print $3}')
