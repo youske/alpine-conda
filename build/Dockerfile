@@ -28,6 +28,6 @@ RUN wget -q --no-check-certificate ${CONDA_URL} && \
 
 COPY entrypoint.sh /docker-entrypoint.sh
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+#ENTRYPOINT ["/docker-entrypoint.sh"]
 WORKDIR ${WORK_DIR}
 CMD ["bash"]
