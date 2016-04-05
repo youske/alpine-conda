@@ -1,23 +1,21 @@
 dockerfile Alpine Linux with miniconda
 ======================================
 
+# 概要
+alpinelinux ベースminicondaを導入したイメージ
+
+以下のものを導入
+
 base image
 frolvlad/alpine-glibc
 
-gosu
-https://github.com/tianon/gosu
+entrykit
+https://github.com/progrium/entrykit
 
 miniconda
 https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
 
-
+# user
 user: admin
-/home/admin
-
-make build
-
-make run
-
-make daemon
-
-make push
+pass: admin
+homedir: /home/admin

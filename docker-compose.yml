@@ -1,8 +1,8 @@
 version: "2"
 services:
 
-  basevm:
-    container_name: conda-vm
+  condaimage:
+    container_name: condacli
     build: build
     ulimits:
       nofile:
@@ -10,12 +10,3 @@ services:
         hard: 40000
       nproc: 65535
     stdin_open: true
-
-
-volumes:
-  data:
-    driver: local
-
-networks:
-  front:
-    driver: bridge

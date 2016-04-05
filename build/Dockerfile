@@ -4,9 +4,13 @@
 FROM frolvlad/alpine-glibc
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
-ENV PACKAGE='bash wget libstdc++' \
+ENV ENTRYKIT_VERSION=0.4.0
+ENV ENTRYKIT_FILE=entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz
+ENV ENTRYKIT_DOWNLOAD=https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/${ENTRYKIT_FILE}
+
+ENV PACKAGE='bash libstdc++' \
+    DOWNLOAD_PACKAGE='wget git ca-certificates ' \
     LANG=C.UTF-8 \
-    GOSU=https://github.com/tianon/gosu/releases/download/1.7/gosu-amd64 \
     CONDA_BASE=/conda \
     MINICONDA=Miniconda-latest-Linux-x86_64.sh \
     CONDA_URL=https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh \
@@ -14,20 +18,23 @@ ENV PACKAGE='bash wget libstdc++' \
     PATH=/conda/bin:$PATH \
     WORK_DIR=/home/admin
 
-RUN adduser -D -h /home/admin -s /bin/bash admin admin && \
-    apk add --no-cache ${PACKAGE}
+# add admin user
+RUN adduser -D -h /home/admin -s /bin/bash admin admin
 
-RUN wget -q --no-check-certificate -O /usr/local/bin/gosu ${GOSU} && \
-    chmod +x /usr/local/bin/gosu
+# apk install
+RUN apk add --no-cache ${PACKAGE} && apk add --no-cache ${DOWNLOAD_PACKAGE} -t dlpack
 
+# entrykit install
+RUN wget --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
+    chmod +x /entrykit && mv /entrykit /bin && /bin/entrykit --symlink
+# conda install
 RUN wget -q --no-check-certificate ${CONDA_URL} && \
     bash /${MINICONDA} -b -p ${CONDA_BASE} && \
     ln -s ${CONDA_BASE}/bin/* /usr/local/bin/ && \
     rm -rf /root/.[acpw]* /${MINICONDA} ${CONDA_BASE}/pkgs/* && \
-    conda update -q -y conda && conda install ${CONDA_PACKAGE} && conda clean -itpsly
+    conda update -q -y conda && conda install -y ${CONDA_PACKAGE} && conda clean -itpsly
 
-COPY entrypoint.sh /docker-entrypoint.sh
+RUN apk del dlpack && rm -rf /tmp/* /var/cache/apk/*
 
-#ENTRYPOINT ["/docker-entrypoint.sh"]
 WORKDIR ${WORK_DIR}
 CMD ["bash"]
