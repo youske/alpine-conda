@@ -18,15 +18,13 @@ ENV PACKAGE='bash libstdc++' \
     PATH=/conda/bin:$PATH \
     WORK_DIR=/home/admin
 
-# add admin user
-RUN adduser -D -h /home/admin -s /bin/bash admin admin
-
 # apk install
 RUN apk add --no-cache ${PACKAGE} && apk add --no-cache ${DOWNLOAD_PACKAGE} -t dlpack
 
 # entrykit install
-RUN wget --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
+RUN wget -q --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
     chmod +x /entrykit && mv /entrykit /bin && /bin/entrykit --symlink
+
 # conda install
 RUN wget -q --no-check-certificate ${CONDA_URL} && \
     bash /${MINICONDA} -b -p ${CONDA_BASE} && \
@@ -36,5 +34,8 @@ RUN wget -q --no-check-certificate ${CONDA_URL} && \
 
 RUN apk del dlpack && rm -rf /tmp/* /var/cache/apk/*
 
+# add admin user
+RUN adduser -D -h /home/admin -s /bin/bash admin admin
+
 WORKDIR ${WORK_DIR}
-CMD ["bash"]
+CMD ["/bin/bash"]
