@@ -10,3 +10,12 @@ services:
         hard: 40000
       nproc: 65535
     stdin_open: true
+
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  front:
+    driver: bridge
