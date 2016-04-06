@@ -32,7 +32,7 @@ RUN wget -q --no-check-certificate ${CONDA_URL} && \
     rm -rf /root/.[acpw]* /${MINICONDA} ${CONDA_BASE}/pkgs/* && \
     conda update -q -y conda && conda install -y ${CONDA_PACKAGE} && conda clean -itpsly
 
-RUN apk del dlpack && rm -rf /tmp/* /var/cache/apk/*
+RUN apk del dlpack --no-cache && rm -rf /tmp/* /var/cache/apk/*
 
 # add admin user
 RUN adduser -D -h /home/admin -s /bin/bash admin admin
