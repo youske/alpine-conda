@@ -4,12 +4,16 @@
 FROM frolvlad/alpine-glibc
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
+LABEL com.geeplus.description="alpine miniconda image" \
+      com.geeplus.vendor="geeplus.inc" \
+      com.geeplus.role="baseimage"
+
 ENV ENTRYKIT_VERSION=0.4.0
 ENV ENTRYKIT_FILE=entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz
 ENV ENTRYKIT_DOWNLOAD=https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/${ENTRYKIT_FILE}
 
-ENV PACKAGE='bash libstdc++' \
-    DOWNLOAD_PACKAGE='wget git ca-certificates ' \
+ENV PACKAGE='bash ' \
+    DOWNLOAD_PACKAGE='wget git ca-certificates build-base linux-headers' \
     LANG=C.UTF-8 \
     CONDA_BASE=/conda \
     MINICONDA=Miniconda-latest-Linux-x86_64.sh \
