@@ -26,11 +26,11 @@ ENV PACKAGE='bash ca-certificates' \
     WORK_DIR=/home/admin
 
 # apk install
-RUN apk update --no-cache && apk add --no-cache ${PACKAGE} && apk add --no-cache ${DOWNLOAD_PACKAGE} -t dlpack
+RUN apk update --no-cache && apk add --no-cache ${PACKAGE} && apk add --no-cache ${DOWNLOAD_PACKAGE} -t buildpack
 
 # entrykit install
 RUN wget -q --no-check-certificate ${ENTRYKIT_DOWNLOAD} -O- | tar zx && \
-    chmod +x /entrykit && mv /entrykit /bin && /bin/entrykit --symlink
+    chmod +x /entrykit && mv /entrykit /usr/bin && /usr/bin/entrykit --symlink
 
 # gosu
 RUN wget -q --no-check-certificate ${GOSU_DOWNLOAD} -O /usr/bin/gosu && chmod +x /usr/bin/gosu
@@ -42,7 +42,7 @@ RUN wget -q --no-check-certificate ${CONDA_URL} && \
     rm -rf /root/.[acpw]* /${MINICONDA} ${CONDA_BASE}/pkgs/* && \
     conda update -q -y conda && conda install -y ${CONDA_PACKAGE} && conda clean -itpsly
 
-RUN apk del dlpack --no-cache && rm -rf /tmp/* /var/cache/apk/*
+RUN apk del buildpack --no-cache && rm -rf /tmp/* /var/cache/apk/*
 
 # add admin user
 RUN adduser -D -h /home/admin -s /bin/bash admin admin
