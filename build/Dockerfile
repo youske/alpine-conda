@@ -19,7 +19,7 @@ ENV MINICONDA=Miniconda-latest-Linux-x86_64.sh
 ENV CONDA_URL=https://repo.continuum.io/miniconda/${MINICONDA}
 ENV CONDA_PACKAGE="virtualenv"
 
-ENV PACKAGE='bash ca-certificates' \
+ENV PACKAGE='bash ca-certificates libstdc++ openssh-client' \
     DOWNLOAD_PACKAGE='wget git build-base linux-headers' \
     LANG=C.UTF-8 \
     PATH=${CONDA_BASE}/bin:$PATH \

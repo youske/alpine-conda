@@ -1,15 +1,13 @@
 #
-.git
 node_modules/
 vendor/
 tests/
 
 #
-.gitignore
+.git*
 .sync-config.cson
 .remote-sync.json
 LICENSE*
-Makefile*
 README*
 
 .tags
