@@ -4,6 +4,11 @@ dockerfile Alpine Linux with miniconda
 # 概要
 alpinelinux ベースminicondaを導入したイメージ
 
+youske/alpine-conda;latest <-
+youske/alpine-conda;2
+youske/alpine-conda:3
+
+
 # 導入
 
 base image

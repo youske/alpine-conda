@@ -1,11 +1,20 @@
 version: "2"
 services:
 
-  condaimage:
-    build: build
+  conda2:
+    build: conda2
     ulimits:
+      nproc: 65535
       nofile:
         soft: 20000
         hard: 40000
+    stdin_open: true
+
+  conda3:
+    build: conda3
+    ulimits:
       nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
     stdin_open: true
