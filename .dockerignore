@@ -7,6 +7,7 @@ tests/
 .git*
 .sync-config.cson
 .remote-sync.json
+.editorconfig
 LICENSE*
 README*
 

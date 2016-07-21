@@ -1,4 +1,4 @@
-# Alpine Linux glibc with conda
+# Alpine Linux glibc with conda python3
 
 FROM frolvlad/alpine-glibc
 MAINTAINER youske miyakoshi <youske@gmail.com>
@@ -22,6 +22,7 @@ ENV CONDA_BASE=/conda
 ENV MINICONDA=Miniconda3-latest-Linux-x86_64.sh
 ENV CONDA_URL=https://repo.continuum.io/miniconda/${MINICONDA}
 ENV CONDA_PACKAGE="virtualenv"
+ENV PIP_PACKAGE="pytest pytest-xdist"
 
 ENV PACKAGE='bash ca-certificates libstdc++ sudo' \
     DOWNLOAD_PACKAGE='wget git build-base musl-dev linux-headers' \
@@ -50,7 +51,9 @@ RUN wget -q --no-check-certificate ${CONDA_URL} && \
     bash /${MINICONDA} -b -p ${CONDA_BASE} && \
     ln -s ${CONDA_BASE}/bin/* /usr/local/bin/ && \
     rm -rf /root/.[acpw]* /${MINICONDA} ${CONDA_BASE}/pkgs/* && \
-    conda update -q -y conda && conda install -y ${CONDA_PACKAGE} && conda clean -itpsly
+    conda update -q -y conda && conda install -y ${CONDA_PACKAGE} && \
+    pip install -U ${PIP_PACKAGE} && \
+    conda clean -itpsly
 
 RUN apk del buildpack --no-cache && rm -rf /tmp/* /var/cache/apk/*
 
