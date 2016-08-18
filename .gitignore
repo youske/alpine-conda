@@ -1,15 +1,25 @@
 #
-node_modules/
-vendor/
-tests/
+node_modules/*
+vendor/*
+tests/*
+.idea/*
 
 #
-.tags
 .sync-config.cson
 .remote-sync.json
 .editorconfig
+
+#
+[cCgGeE]tags
+[cCgGeE]TAGS
+.DS_Store
+._.DS_Store
+.apdisk
+Thumbs.db
+.tags
 *.swp
 *.lck
+*.lock
 *.*~
 *~
 

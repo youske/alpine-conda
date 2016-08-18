@@ -2,23 +2,17 @@ dockerfile Alpine Linux with miniconda
 ======================================
 
 # 概要
-alpinelinux ベースminicondaを導入したイメージ
+alpinelinux ベースanacondaを導入したイメージ
 
-youske/alpine-conda;latest <-
-youske/alpine-conda;2
-youske/alpine-conda:3
+youske/alpine-conda;latest <- miniconda2
+youske/alpine-conda;miniconda2 <-2 miniconda
+youske/alpine-conda:miniconda3
 
 
 # 導入
 
 base image
-frolvlad/alpine-glibc
 
-entrykit
-https://github.com/progrium/entrykit
-
-gosu
-https://github.com/tianon/gosu
 
 miniconda
 https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
