@@ -16,3 +16,19 @@ services:
       nofile:
         soft: 20000
         hard: 40000
+
+  anaconda2:
+    build: anaconda2
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+
+  anaconda3:
+    build: anaconda3
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000

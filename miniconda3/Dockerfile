@@ -1,4 +1,8 @@
 FROM youske/alpine-stdmachine:glibc
+MAINTAINER youske miyakoshi <youske@gmail.com>
+
+LABEL com.stdmachine.description="alpine miniconda3 image" \
+      com.stdmachine.role="miniconda3 image"
 
 ENV CONDA_DIR="/conda"
 ENV PATH="$CONDA_DIR/bin:$PATH"
