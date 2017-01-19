@@ -8,8 +8,7 @@ ENV CONDA_DIR="/conda"
 ENV PATH="$CONDA_DIR/bin:$PATH"
 
 WORKDIR /tmp
-
-RUN CONDA_VERSION="4.1.1" && \
+RUN CONDA_VERSION="4.2.0" && \
     mkdir -p "$CONDA_DIR" && \
     wget "https://repo.continuum.io/archive/Anaconda3-${CONDA_VERSION}-Linux-x86_64.sh" -O installer.sh && \
     bash installer.sh -f -b -p "$CONDA_DIR" && \
