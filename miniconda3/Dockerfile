@@ -1,4 +1,4 @@
-FROM youske/alpine-stdmachine:glibc
+FROM youske/alpine-stdmachine-glibc:latest
 MAINTAINER youske miyakoshi <youske@gmail.com>
 
 LABEL com.stdmachine.description="alpine miniconda3 image" \
